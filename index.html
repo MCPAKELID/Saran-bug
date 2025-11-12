@@ -213,7 +213,7 @@ textarea{resize:vertical;min-height:100px;}
                     <label for="pesan_bug">Detail Laporan Bug:</label>
                     <textarea id="pesan_bug" name="pesan_bug" placeholder="Jelaskan langkah-langkah untuk mereproduksi bug dengan detail." required></textarea>
 
-                    <label for="media_bug">Unggah Gambar atau Video (Opsional, maks. 1 file):</label>
+                    <label for="media_bug">Unggah Gambar atau Video (Opsional, maks. 1 file) [BELOM BISA KIRIM GAMBAR/VIDIO]:</label>
                     <input type="file" id="media_bug" name="media_bug" accept="image/*,video/*">
                 </div>
                 
@@ -442,7 +442,7 @@ function switchToPage(page) {
 }
 
 /* ===============================
-   8. KIRIM KE DISCORD (DENGAN FILE)
+   8. KIRIM KE DISCORD (DENGAN FILE & EMBED BAGUS)
    =============================== */
 async function sendToDiscord(data) {
   const url = data.jenis === 'Saran' ? WEBHOOK_SARAN : WEBHOOK_BUG;
@@ -453,24 +453,29 @@ async function sendToDiscord(data) {
     return true;
   }
 
+  // 🎨 Warna & emoji beda untuk tiap jenis
+  const embedColor = data.jenis === 'Saran' ? 0x00b894 : 0xe74c3c;
+  const titleEmoji  = data.jenis === 'Saran' ? '💡' : '🐞';
+
   const embed = {
-    title: `[${data.jenis.toUpperCase()}] Dari ${data.nama}`,
-    description: data.pesan,
-    color: data.jenis === 'Saran' ? 0x3498db : 0xe74c3c,
+    title: `${titleEmoji} ${data.jenis.toUpperCase()} BARU DARI ${data.nama}`,
+    description: `**Pesan:**\n> ${data.pesan}`,
+    color: embedColor,
     fields: [
-      { name: 'Nama Pengirim', value: data.nama, inline: true },
-      { name: 'Jenis', value: data.jenis, inline: true },
+      { name: '🧾 Jenis', value: data.jenis, inline: true },
+      { name: '🙍‍♂️ Nama', value: data.nama, inline: true },
     ],
     timestamp: new Date().toISOString(),
+    footer: { text: '📩 Trimakasih atas pemberitahuannya.', icon_url: 'https://i.ibb.co.com/3mjNLYrn/20251112-175342.png' },
   };
 
   if (data.kategori && data.kategori !== '-') {
-    embed.fields.push({ name: 'Kategori Bug', value: data.kategori, inline: true });
+    embed.fields.push({ name: '📂 Kategori Bug', value: data.kategori, inline: true });
   }
 
   const formDataToSend = new FormData();
   formDataToSend.append('payload_json', JSON.stringify({
-    username: 'Formulir Masukan (Bot)',
+    username: '🧩 Formulir Masukan (Bot)',
     embeds: [embed],
   }));
 
