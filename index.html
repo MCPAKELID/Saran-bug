@@ -6,202 +6,175 @@
     <title>Formulir Saran & Lapor Bug (Versi Ikon)</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <style>
-        /* CSS untuk Styling */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e9eef2;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            margin: 0;
-            padding: 40px 20px;
-        }
+<style>
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #e9eef2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  padding: 40px 20px;
+}
 
-        .container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-            width: 100%;
-            max-width: 600px;
-        }
+.container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 600px;
+}
 
-        h2 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 30px;
-            font-weight: 600;
-        }
+h2 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
 
-        /* --- STYLING TOMBOL PILIHAN JENIS --- */
-        .type-group {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
+/* Tombol jenis */
+.type-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
 
-        .type-button {
-            flex-grow: 1;
-            padding: 15px 10px;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            background-color: #f7f9fa;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        
-        .type-button i {
-            margin-right: 8px;
-            font-size: 1.2em;
-        }
-        
-        /* Gaya saat tombol dipilih */
-        .type-button.selected {
-            background-color: #3498db;
-            color: white;
-            border-color: #2980b9;
-            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
-        }
+.type-button {
+  flex-grow: 1;
+  padding: 15px 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f7f9fa;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+.type-button i { margin-right: 8px; font-size: 1.2em; }
+.type-button.selected {
+  background-color: #3498db;
+  color: white;
+  border-color: #2980b9;
+  box-shadow: 0 4px 8px rgba(52,152,219,0.3);
+}
+.type-button:hover:not(.selected){background-color:#e9eef2;}
 
-        .type-button:hover:not(.selected) {
-            background-color: #e9eef2;
-        }
-        
-        /* --- STYLING INPUT & TEXTAREA --- */
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            color: #34495e;
-            margin-top: 15px;
-        }
+/* Input */
+label{display:block;margin-bottom:6px;font-weight:600;color:#34495e;margin-top:15px;}
+input[type="text"],textarea,select{
+  width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;box-sizing:border-box;font-size:14px;
+}
+textarea{resize:vertical;min-height:100px;}
+.form-section{padding:15px;border:1px solid #dcdcdc;border-radius:8px;margin-top:15px;background-color:#fcfcfc;display:none;}
 
-        input[type="text"], textarea, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
+/* Tombol utama */
+.main-button{
+  background-color:#3498db;color:white;padding:12px 15px;border:none;border-radius:6px;cursor:pointer;width:100%;
+  font-size:16px;font-weight:600;margin-top:25px;transition:background-color .3s ease;
+}
+.main-button i{margin-left:8px;}
+.main-button:hover{background-color:#2980b9;}
+#edit-btn{background-color:#6c757d;}
+#edit-btn:hover{background-color:#5a6268;}
 
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
+/* Halaman preview & thanks */
+#preview-page{display:none;padding:20px;border:1px solid #2ecc71;background-color:#e8f8f5;border-radius:8px;margin-top:20px;}
+#preview-page h3{color:#27ae60;border-bottom:1px dashed #2ecc71;padding-bottom:10px;}
+#thanks-page{display:none;text-align:center;padding:40px 20px;background-color:#fff3cd;border:1px solid #ffeeba;color:#856404;border-radius:8px;}
+#thanks-page h3{margin-top:0;color:#007bff;}
 
-        /* Bagian Formulir Khusus */
-        .form-section {
-            padding: 15px;
-            border: 1px solid #dcdcdc;
-            border-radius: 8px;
-            margin-top: 15px;
-            background-color: #fcfcfc;
-            display: none;
-        }
+/* --- STYLING AREA PROMOSI & TOMBOL SOSIAL --- */
+.promo-area {
+  margin-top: 40px;
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+}
 
-        /* --- STYLING TOMBOL UTAMA --- */
-        .main-button {
-            background-color: #3498db;
-            color: white;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            font-weight: 600;
-            margin-top: 25px;
-            transition: background-color 0.3s ease;
-        }
+.promo-area h3 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
 
-        .main-button i {
-            margin-left: 8px;
-        }
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* ✅ biar turun ke bawah di layar kecil */
+    gap: 10px;
+}
 
-        .main-button:hover {
-            background-color: #2980b9;
-        }
-        
-        #edit-btn {
-            background-color: #6c757d; 
-        }
+.social-btn {
+  flex: 1 1 100%;
+  max-width: 250px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e9eef2;
+  color: #34495e;
+  border: 2px solid #ccc;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-width: 140px;
+  max-width: 200px;
+  margin: 0 auto;
+}
 
-        #edit-btn:hover {
-            background-color: #5a6268;
-        }
+.social-btn i {
+  margin-right: 8px;
+}
 
-        /* --- Halaman Preview/Terima Kasih (Gaya sebelumnya dipertahankan) --- */
-        #preview-page { display: none; padding: 20px; border: 1px solid #2ecc71; background-color: #e8f8f5; border-radius: 8px; margin-top: 20px; }
-        #preview-page h3 { color: #27ae60; border-bottom: 1px dashed #2ecc71; padding-bottom: 10px; }
-        #preview-page p strong { display: inline-block; width: 120px; color: #34495e; }
-        #thanks-page { display: none; text-align: center; padding: 40px 20px; background-color: #fff3cd; border: 1px solid #ffeeba; color: #856404; border-radius: 8px; }
-        #thanks-page h3 { margin-top: 0; color: #007bff; }
+.social-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
 
-        /* --- STYLING AREA PROMOSI & TOMBOL SOSIAL --- */
-        .promo-area {
-            margin-top: 40px;
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #ccc;
-        }
+.youtube-btn { background-color: #ff0000; color: #fff; border-color: #cc0000; }
+.tiktok-btn { background-color: #000; color: #fff; border-color: #444; }
+.donate-btn { background-color: #2ecc71; color: #fff; border-color: #27ae60; }
 
-        .promo-area h3 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
+/* Banner promosi bisa diklik */
+.promo-link {
+  display: inline-block;
+  width: 100%;
+  max-width: 100%;
+}
 
-        .social-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
+.promo-banner {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
 
-        .social-btn {
-            background-color: #e9eef2;
-            color: #34495e;
-            border: 2px solid #ccc;
-            padding: 10px 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            min-width: 120px;
-        }
+.promo-banner:hover {
+  transform: scale(1.03);
+}
 
-        .social-btn i {
-            margin-right: 8px;
-        }
+/* Responsif untuk HP */
+@media (max-width: 480px) {
+  .social-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
 
-        .social-btn:hover {
-            opacity: 0.8;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Gaya Khusus Sosial */
-        .youtube-btn { background-color: #ff0000; color: white; border-color: #cc0000; }
-        .tiktok-btn { background-color: #000000; color: white; border-color: #444; }
-        .donate-btn { background-color: #2ecc71; color: white; border-color: #27ae60; }
-
-        .promo-banner {
-            width: 100%;
-            height: auto;
-            max-width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-</head>
-<body>
-
+  .social-btn {
+    width: 100%;
+    max-width: none;
+    font-size: 15px;
+  }
+}
+</style>
     <div class="container">
         <div id="form-content">
             <h2>📢 Masukan & Laporan Pengguna</h2>
@@ -240,7 +213,7 @@
                     <label for="pesan_bug">Detail Laporan Bug:</label>
                     <textarea id="pesan_bug" name="pesan_bug" placeholder="Jelaskan langkah-langkah untuk mereproduksi bug dengan detail." required></textarea>
 
-                    <label for="media_bug">Unggah Gambar atau Video (Opsional, maks. 1 file) [BELOM BISA KIRIM GAMBAR/VIDIO]:</label>
+                    <label for="media_bug">Unggah Gambar atau Video (Opsional, maks. 1 file):</label>
                     <input type="file" id="media_bug" name="media_bug" accept="image/*,video/*">
                 </div>
                 
@@ -278,7 +251,9 @@
                             <i class="fas fa-heart"></i> Donasi
                         </a>
                     </div>
-                    <img src="https://i.ibb.co.com/3mjNLYrn/20251112-175342.png?text=BANNER+PROMOSI+ANDA+DI+SINI" alt="Banner Promosi" class="promo-banner">
+                    <a href="https://lynk.id/mcpakelstore" target="_blank" class="promo-link">
+  <img src="https://i.ibb.co.com/3mjNLYrn/20251112-175342.png" alt="Banner Promosi" class="promo-banner">
+</a>
                 </div>
             </div>
         </div>
@@ -300,224 +275,227 @@
         </div>
     </div>
 
-    <script>
-        // --- KONFIGURASI ---
-        const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1429765084225208363/YgdpqTmkcyl5-8H_u90pOy3_eKBoqDZftGRj5EaFHgj54-nJCip_twR3e6tt-Ll_3s9A'; // GANTI INI!
-        // -------------------
+<script>
+/* ===============================
+   KONFIGURASI WEBHOOK DISCORD
+   =============================== */
+const WEBHOOK_SARAN = 'https://discord.com/api/webhooks/1438173006819233914/0huoJ_0QFhDaTiRb5laW3ouP1r7MflwrUu0Zlgjxcqei5z8aDKOxSLpsvOuKxRScdos_';
+const WEBHOOK_BUG   = 'https://discord.com/api/webhooks/1438173355462099024/9JbO4mVtdskefS0rGrcn4DvWgq_r_OkP_WXgKZbsH6QNrTaUSxSq01iGtsPvjZeHheYV';
 
-        // Elemen-elemen DOM
-        const form = document.getElementById('feedbackForm');
-        const saranFields = document.getElementById('saran-fields');
-        const bugFields = document.getElementById('bug-fields');
-        const submitBtn = document.getElementById('submit-btn');
-        const typeButtons = document.querySelectorAll('.type-button');
-        
-        const previewPage = document.getElementById('preview-page');
-        const thanksPage = document.getElementById('thanks-page');
-        const previewContent = document.getElementById('preview-content');
-        const confirmBtn = document.getElementById('confirm-btn');
-        const editBtn = document.getElementById('edit-btn');
-        const promoFooter = document.getElementById('promo-footer');
-        
-        let formData = {}; // Objek untuk menyimpan data formulir
-        let selectedType = null; // Variabel untuk menyimpan jenis yang dipilih
+/* ===============================
+   VARIABEL DAN ELEMEN DASAR
+   =============================== */
+const form = document.getElementById('feedbackForm');
+const saranFields = document.getElementById('saran-fields');
+const bugFields = document.getElementById('bug-fields');
+const submitBtn = document.getElementById('submit-btn');
+const typeButtons = document.querySelectorAll('.type-button');
+const previewPage = document.getElementById('preview-page');
+const thanksPage = document.getElementById('thanks-page');
+const previewContent = document.getElementById('preview-content');
+const confirmBtn = document.getElementById('confirm-btn');
+const editBtn = document.getElementById('edit-btn');
+const promoFooter = document.getElementById('promo-footer');
 
-        // 1. Logika Pemilihan Jenis Masukan (Klik Tombol)
-        typeButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Hapus kelas 'selected' dari semua tombol
-                typeButtons.forEach(btn => btn.classList.remove('selected'));
-                
-                // Tambahkan kelas 'selected' ke tombol yang diklik
-                this.classList.add('selected');
-                
-                selectedType = this.getAttribute('data-type');
-                
-                // Tampilkan field formulir yang sesuai
-                toggleFormFields(selectedType);
+let formData = {};
+let selectedType = null;
 
-                // Tampilkan tombol submit
-                submitBtn.style.display = 'block';
-            });
-        });
+/* ===============================
+   1. PILIH JENIS SARAN / BUG
+   =============================== */
+typeButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    typeButtons.forEach(btn => btn.classList.remove('selected'));
+    this.classList.add('selected');
+    selectedType = this.getAttribute('data-type');
+    toggleFormFields(selectedType);
+    submitBtn.style.display = 'block';
+  });
+});
 
+/* ===============================
+   2. TAMPILKAN FORM SESUAI PILIHAN
+   =============================== */
+function toggleFormFields(type) {
+  saranFields.style.display = 'none';
+  bugFields.style.display = 'none';
 
-        // 2. Logika Tampilan Dinamis Formulir
-        function toggleFormFields(type) {
-            saranFields.style.display = 'none';
-            bugFields.style.display = 'none';
+  document.getElementById('pesan_saran').required = false;
+  document.getElementById('pesan_bug').required = false;
+  document.getElementById('kategori_bug').required = false;
 
-            // Reset required state
-            document.getElementById('pesan_saran').required = false;
-            document.getElementById('pesan_bug').required = false;
-            document.getElementById('kategori_bug').required = false;
+  if (type === 'Saran') {
+    saranFields.style.display = 'block';
+    document.getElementById('pesan_saran').required = true;
+  } else if (type === 'Lapor Bug') {
+    bugFields.style.display = 'block';
+    document.getElementById('pesan_bug').required = true;
+    document.getElementById('kategori_bug').required = true;
+  }
+}
 
-            if (type === 'Saran') {
-                saranFields.style.display = 'block';
-                document.getElementById('pesan_saran').required = true;
-            } else if (type === 'Lapor Bug') {
-                bugFields.style.display = 'block';
-                document.getElementById('pesan_bug').required = true;
-                document.getElementById('kategori_bug').required = true;
-            }
-        }
+/* ===============================
+   3. KETIKA FORM DIKIRIM (MENUJU PREVIEW)
+   =============================== */
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
 
+  if (!selectedType) {
+    alert("Mohon pilih Jenis Masukan terlebih dahulu!");
+    return;
+  }
 
-        // 3. Handler Pengiriman Formulir (Menuju Preview)
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Pastikan jenis sudah dipilih
-            if (!selectedType) {
-                alert("Mohon pilih Jenis Masukan terlebih dahulu!");
-                return;
-            }
+  formData.jenis = selectedType;
 
-            // Validasi HTML5 akan menangani input required (pesan_saran/pesan_bug/kategori_bug)
+  if (selectedType === 'Saran') {
+    formData.nama = document.getElementById('nama_saran').value || 'Anonim';
+    formData.pesan = document.getElementById('pesan_saran').value;
+    formData.kategori = '-';
+    formData.file = null;
+    formData.media = '-';
+  } else if (selectedType === 'Lapor Bug') {
+    formData.nama = document.getElementById('nama_bug').value || 'Anonim';
+    formData.kategori = document.getElementById('kategori_bug').value;
+    formData.pesan = document.getElementById('pesan_bug').value;
 
-            // Mengumpulkan data
-            formData.jenis = selectedType;
+    const mediaFile = document.getElementById('media_bug').files[0];
+    if (mediaFile) {
+      formData.file = mediaFile;
+      formData.media = mediaFile.name;
+    } else {
+      formData.file = null;
+      formData.media = 'Tidak Ada File';
+    }
+  }
 
-            if (selectedType === 'Saran') {
-                formData.nama = document.getElementById('nama_saran').value || 'Anonim';
-                formData.pesan = document.getElementById('pesan_saran').value;
-                formData.kategori = '-';
-                formData.media = '-';
-            } else if (selectedType === 'Lapor Bug') {
-                formData.nama = document.getElementById('nama_bug').value || 'Anonim';
-                formData.kategori = document.getElementById('kategori_bug').value;
-                formData.pesan = document.getElementById('pesan_bug').value;
-                
-                const mediaFile = document.getElementById('media_bug').files[0];
-                formData.media = mediaFile ? `[Simulasi] ${mediaFile.name} (${(mediaFile.size / 1024 / 1024).toFixed(2)} MB)` : 'Tidak Ada File';
-            }
-            
-            // Pindah ke halaman Preview
-            switchToPage('preview');
-            updatePreview();
-        });
+  switchToPage('preview');
+  updatePreview();
+});
 
+/* ===============================
+   4. TAMPILKAN DATA DI HALAMAN PREVIEW
+   =============================== */
+function updatePreview() {
+  previewContent.innerHTML = `
+    <p><strong>Jenis:</strong> ${formData.jenis}</p>
+    <p><strong>Nama:</strong> ${formData.nama}</p>
+    ${formData.kategori !== '-' ? `<p><strong>Kategori:</strong> ${formData.kategori}</p>` : ''}
+    <p><strong>Pesan:</strong></p>
+    <pre style="white-space: pre-wrap; font-family: inherit; background: #f8f9fa; padding: 10px; border-radius: 6px;">${formData.pesan}</pre>
+    ${formData.media && formData.media !== '-' ? `<p><strong>File:</strong> ${formData.media}</p>` : ''}
+  `;
+}
 
-        // 4. Fungsi untuk Mengisi Konten Pratinjau
-        function updatePreview() {
-            previewContent.innerHTML = `
-                <p><strong>Jenis:</strong> ${formData.jenis}</p>
-                <p><strong>Nama:</strong> ${formData.nama}</p>
-                ${formData.kategori !== '-' ? `<p><strong>Kategori:</strong> ${formData.kategori}</p>` : ''}
-                <p><strong>Pesan:</strong> <br><pre style="white-space: pre-wrap; font-family: inherit; background: #f0f0f0; padding: 10px; border-radius: 4px;">${formData.pesan}</pre></p>
-                ${formData.media !== '-' ? `<p><strong>File Media:</strong> ${formData.media}</p>` : ''}
-            `;
-        }
+/* ===============================
+   5. TOMBOL EDIT KEMBALI
+   =============================== */
+editBtn.addEventListener('click', function() {
+  switchToPage('form');
+});
 
+/* ===============================
+   6. TOMBOL KONFIRMASI & KIRIM
+   =============================== */
+confirmBtn.addEventListener('click', async function() {
+  confirmBtn.disabled = true;
+  confirmBtn.innerHTML = 'Mengirim... <i class="fas fa-spinner fa-spin"></i>';
 
-        // 5. Handler Tombol Edit (Kembali ke Formulir)
-        editBtn.addEventListener('click', function() {
-            switchToPage('form');
-        });
+  try {
+    await sendToDiscord(formData);
+    switchToPage('thanks');
+  } catch (error) {
+    alert('❌ Gagal mengirim ke Discord. Cek console untuk detail.');
+    console.error('Error saat kirim ke Discord:', error);
+    editBtn.click();
+  } finally {
+    confirmBtn.disabled = false;
+    confirmBtn.innerHTML = 'Konfirmasi & Kirim <i class="fas fa-paper-plane"></i>';
+    form.reset();
+  }
+});
 
+/* ===============================
+   7. MANAJEMEN HALAMAN
+   =============================== */
+function switchToPage(page) {
+  document.querySelector('.type-group').style.display = 'none';
+  saranFields.style.display = 'none';
+  bugFields.style.display = 'none';
+  submitBtn.style.display = 'none';
+  previewPage.style.display = 'none';
+  thanksPage.style.display = 'none';
+  promoFooter.style.display = 'none';
 
-        // 6. Handler Tombol Konfirmasi & Kirim (Proses Pengiriman ke Discord)
-        confirmBtn.addEventListener('click', function() {
-            confirmBtn.disabled = true;
-            confirmBtn.innerHTML = 'Sedang Mengirim... <i class="fas fa-spinner fa-spin"></i>';
+  if (page === 'form') {
+    document.querySelector('.type-group').style.display = 'flex';
+    const selectedButton = document.querySelector(`.type-button[data-type="${selectedType}"]`);
+    if (selectedButton) selectedButton.classList.add('selected');
+    submitBtn.style.display = 'block';
+    toggleFormFields(selectedType);
+  } else if (page === 'preview') {
+    previewPage.style.display = 'block';
+  } else if (page === 'thanks') {
+    thanksPage.style.display = 'block';
+  }
 
-            sendToDiscord(formData)
-                .then(() => {
-                    switchToPage('thanks');
-                })
-                .catch(error => {
-                    alert('Gagal mengirim ke Discord Webhook (simulasi). Cek console atau URL webhook Anda.');
-                    console.error('Error saat mengirim ke Discord:', error);
-                    // Kembali ke preview untuk edit
-                    editBtn.click(); 
-                })
-                .finally(() => {
-                    confirmBtn.disabled = false;
-                    confirmBtn.innerHTML = 'Konfirmasi & Kirim <i class="fas fa-paper-plane"></i>';
-                    form.reset(); // Reset form setelah berhasil
-                });
-        });
+  window.scrollTo(0, 0);
+}
 
+/* ===============================
+   8. KIRIM KE DISCORD (DENGAN FILE)
+   =============================== */
+async function sendToDiscord(data) {
+  const url = data.jenis === 'Saran' ? WEBHOOK_SARAN : WEBHOOK_BUG;
 
-        // 7. Fungsi untuk Mengatur Tampilan Halaman (Form, Preview, Thanks)
-        function switchToPage(page) {
-            // Sembunyikan semua
-            document.querySelector('.type-group').style.display = 'none';
-            saranFields.style.display = 'none';
-            bugFields.style.display = 'none';
-            submitBtn.style.display = 'none';
-            previewPage.style.display = 'none';
-            thanksPage.style.display = 'none';
-            promoFooter.style.display = 'none';
-            
-            // Tampilkan yang sesuai
-            if (page === 'form') {
-                document.querySelector('.type-group').style.display = 'flex';
-                // Pertahankan tombol yang dipilih tetap 'selected'
-                const selectedButton = document.querySelector(`.type-button[data-type="${selectedType}"]`);
-                if(selectedButton) selectedButton.classList.add('selected');
+  if (!url || url.includes('WEBHOOK_ID_')) {
+    console.warn('⚠️ Webhook belum disetel. Simulasi sukses.');
+    await new Promise(r => setTimeout(r, 1000));
+    return true;
+  }
 
-                submitBtn.style.display = 'block';
-                toggleFormFields(selectedType);
-            } else if (page === 'preview') {
-                previewPage.style.display = 'block';
-            } else if (page === 'thanks') {
-                thanksPage.style.display = 'block';
-            }
-            window.scrollTo(0, 0);
-        }
+  const embed = {
+    title: `[${data.jenis.toUpperCase()}] Dari ${data.nama}`,
+    description: data.pesan,
+    color: data.jenis === 'Saran' ? 0x3498db : 0xe74c3c,
+    fields: [
+      { name: 'Nama Pengirim', value: data.nama, inline: true },
+      { name: 'Jenis', value: data.jenis, inline: true },
+    ],
+    timestamp: new Date().toISOString(),
+  };
 
-        // 8. Fungsi untuk Mengirim Data ke Discord Webhook (Sama seperti sebelumnya)
-        async function sendToDiscord(data) {
-            // ... (Fungsi sendToDiscord yang sama dari kode sebelumnya) ...
-            if (DISCORD_WEBHOOK_URL === 'GANTI_DENGAN_URL_WEBHOOK_DISCORD_ANDA') {
-                console.warn("⚠️ URL Webhook Discord belum disetel. Melakukan simulasi berhasil.");
-                await new Promise(resolve => setTimeout(resolve, 1500));
-                return true;
-            }
+  if (data.kategori && data.kategori !== '-') {
+    embed.fields.push({ name: 'Kategori Bug', value: data.kategori, inline: true });
+  }
 
-            const discordPayload = {
-                username: "Formulir Masukan (Bot)",
-                embeds: [{
-                    title: `[${data.jenis.toUpperCase()}] Masukan Baru dari ${data.nama}`,
-                    description: data.pesan,
-                    color: data.jenis === 'Saran' ? 3447003 : 15158332,
-                    fields: [
-                        { name: "Jenis", value: data.jenis, inline: true },
-                        { name: "Nama Pengirim", value: data.nama, inline: true },
-                    ],
-                    timestamp: new Date().toISOString(),
-                    footer: {
-                        text: `Media: ${data.media}`
-                    }
-                }]
-            };
+  const formDataToSend = new FormData();
+  formDataToSend.append('payload_json', JSON.stringify({
+    username: 'Formulir Masukan (Bot)',
+    embeds: [embed],
+  }));
 
-            if (data.kategori !== '-') {
-                discordPayload.embeds[0].fields.push({ name: "Kategori Bug", value: data.kategori, inline: true });
-            }
+  if (data.file) {
+    formDataToSend.append('file', data.file, data.file.name);
+  }
 
-            try {
-                const response = await fetch(DISCORD_WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(discordPayload)
-                });
+  const response = await fetch(url, {
+    method: 'POST',
+    body: formDataToSend,
+  });
 
-                if (!response.ok) {
-                    throw new Error(`Discord Webhook error: ${response.status}`);
-                }
-                return true;
-            } catch (error) {
-                console.error("Terjadi kesalahan saat Fetch ke Discord:", error);
-                throw error;
-            }
-        }
-        
-        // Atur tampilan awal
-        switchToPage('form');
-        document.querySelector('.type-group').style.display = 'flex'; // Pastikan tombol jenis terlihat di awal
-        submitBtn.style.display = 'none'; // Sembunyikan tombol submit sampai jenis dipilih
-    </script>
+  if (!response.ok) {
+    throw new Error(`Discord Webhook error: ${response.status}`);
+  }
+
+  return true;
+}
+
+/* ===============================
+   9. TAMPILAN AWAL
+   =============================== */
+switchToPage('form');
+document.querySelector('.type-group').style.display = 'flex';
+submitBtn.style.display = 'none';
+</script>
 </body>
 </html>
