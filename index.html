@@ -71,7 +71,26 @@ input[type="text"],textarea,select{
   width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;box-sizing:border-box;font-size:14px;
 }
 textarea{resize:vertical;min-height:100px;}
-.form-section{padding:15px;border:1px solid #dcdcdc;border-radius:8px;margin-top:15px;background-color:#fcfcfc;display:none;}
+
+/* --- MODIFIKASI: Transisi Form Section agar lebih hidup --- */
+.form-section{
+  padding:15px;
+  border:1px solid #dcdcdc;
+  border-radius:8px;
+  margin-top:15px;
+  background-color:#fcfcfc;
+  display:none;
+  /* Tambahan CSS Transisi */
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease-out, max-height 0.4s ease-out;
+}
+.form-section.show {
+  opacity: 1;
+  max-height: 500px; /* Nilai yang cukup besar untuk menampung semua form */
+}
+/* --- AKHIR MODIFIKASI --- */
 
 /* --- STYLING RATING BINTANG BARU --- */
 .rating-group {
@@ -193,6 +212,7 @@ textarea{resize:vertical;min-height:100px;}
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  margin-top: 15px; /* Tambahan jarak */
 }
 
 .promo-banner:hover {
@@ -217,10 +237,39 @@ textarea{resize:vertical;min-height:100px;}
   .type-button {
     min-width: unset;
   }
+/* === HEADER DI AWAL HALAMAN === */
+.home-header {
+  text-align: center;
+  background: linear-gradient(135deg, #2980b9, #8e44ad);
+  padding: 15px 10px 20px;
+  color: #fff;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.home-header-banner {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  margin-bottom: 10px;
+}
+
+.home-header-marquee {
+  font-weight: 600;
+  color: #fff;
+  font-size: 1em;
+  text-shadow: 0 0 5px rgba(255,255,255,0.6);
+}
+
+@media (max-width:480px){
+  .home-header{padding:12px 6px;}
+  .home-header-banner{max-width:100%;}
+  .home-header-marquee{font-size:0.9em;}
 }
 </style>
     <div class="container">
-        <div id="form-content">
             <h2>📢 Masukan & Laporan Pengguna</h2>
             
             <div class="type-group">
@@ -304,42 +353,36 @@ textarea{resize:vertical;min-height:100px;}
             <div id="thanks-page">
                 <h3>✅ Berhasil!</h3>
                 <p style="font-size: 1.1em;">Terima kasih banyak atas masukan Anda. Laporan/Saran Anda telah berhasil dikirimkan ke tim kami untuk segera ditinjau!</p>
-                <p style="font-size: 0.9em; color: #6c757d;">Semoga di lihat creator nya :)</p>
+                <p style="font-size: 0.9em; color: #6c757d;">Masukan Anda sangat berharga untuk pengembangan selanjutnya. 🙏</p>
+                
                 <div class="promo-area">
-                    <h3>Dukung Kami dan Ikuti Perkembangan!</h3>
+                    <hr style="border: 0; border-top: 1px dashed #ccc; margin: 20px 0;">
+
+                    <h3>✨ Mari Dukung MCPAKEL! ✨</h3>
+                    <p style="font-size: 1em; color: #34495e; margin-bottom: 25px; font-style: italic;">
+                        Setiap dukungan (Donasi, Subscribe, Follow) sangat berarti untuk menyemangati MCPAKEL agar terus berkarya, membuat plugin yang lebih bagus, dan memberikan update terbaik! Jangan sampai ketinggalan konten-konten seru dan karya terbaru kami.
+                    </p>
+
                     <div class="social-buttons">
                         <a href="https://youtube.com/@alexpakel" target="_blank" class="social-btn youtube-btn">
-                            <i class="fab fa-youtube"></i> YouTube
+                            <i class="fab fa-youtube"></i> Tonton Konten Baru!
                         </a>
                         <a href="https://www.tiktok.com/@mcpakel?_t=8lhrWczsUF7&_r=1" target="_blank" class="social-btn tiktok-btn">
-                            <i class="fab fa-tiktok"></i> TikTok
+                            <i class="fab fa-tiktok"></i> Ikuti Keseruan!
                         </a>
                         <a href="https://sociabuzz.com/alexpakell/tribe" target="_blank" class="social-btn donate-btn">
-                            <i class="fas fa-heart"></i> Donasi
+                            <i class="fas fa-heart"></i> Beri Semangat (Donasi)
                         </a>
                     </div>
-                    <a href="https://lynk.id/mcpakelstore" target="_blank" class="promo-link">
-  <img src="https://i.ibb.co.com/3mjNLYrn/20251112-175342.png" alt="Banner Promosi" class="promo-banner">
-</a>
+                    <a href="https://lynk.id/mcpakelstore" target="_blank" class="promo-link" style="margin-top: 25px;">
+                        <img src="https://i.ibb.co.com/3mjNLYrn/20251112-175342.png" alt="Banner Promosi" class="promo-banner">
+                    </a>
                 </div>
             </div>
-        </div>
+            </div>
         
         <div id="promo-footer" class="promo-area" style="display: none;">
-            <h3>Dukung Kami dan Ikuti Perkembangan!</h3>
-            <div class="social-buttons">
-                <a href="#youtube_link" target="_blank" class="social-btn youtube-btn">
-                    <i class="fab fa-youtube"></i> YouTube
-                </a>
-                <a href="#tiktok_link" target="_blank" class="social-btn tiktok-btn">
-                    <i class="fab fa-tiktok"></i> TikTok
-                </a>
-                <a href="#donate_link" target="_blank" class="social-btn donate-btn">
-                    <i class="fas fa-heart"></i> Donasi
-                </a>
             </div>
-            <img src="https://i.ibb.co.com/3mjNLYrn/20251112-175342.png?text=BANNER+PROMOSI+ANDA+DI+SINI" alt="Banner Promosi" class="promo-banner">
-        </div>
     </div>
 <script>
 /* ===============================
@@ -357,7 +400,7 @@ const WEBHOOK_RATING  = 'https://discord.com/api/webhooks/1438180368250310767/oY
 const form = document.getElementById('feedbackForm');
 const saranFields = document.getElementById('saran-fields');
 const bugFields = document.getElementById('bug-fields');
-const ratingFields = document.getElementById('rating-fields'); // BARU: Elemen form rating
+const ratingFields = document.getElementById('rating-fields'); 
 const submitBtn = document.getElementById('submit-btn');
 const typeButtons = document.querySelectorAll('.type-button');
 const previewPage = document.getElementById('preview-page');
@@ -366,13 +409,13 @@ const previewContent = document.getElementById('preview-content');
 const confirmBtn = document.getElementById('confirm-btn');
 const editBtn = document.getElementById('edit-btn');
 const promoFooter = document.getElementById('promo-footer');
+const formSections = document.querySelectorAll('.form-section'); // BARU
 
 let formData = {};
 let selectedType = null;
 
 /* ===============================
    1. PILIH JENIS SARAN / BUG
-   (Tidak ada perubahan di sini)
    =============================== */
 typeButtons.forEach(button => {
   button.addEventListener('click', function() {
@@ -385,38 +428,48 @@ typeButtons.forEach(button => {
 });
 
 /* ===============================
-   2. TAMPILKAN FORM SESUAI PILIHAN
-   (Diperbarui untuk mendukung Penilaian)
+   2. TAMPILKAN FORM SESUAI PILIHAN (DENGAN EFEK TRANSISI)
    =============================== */
 function toggleFormFields(type) {
-  saranFields.style.display = 'none';
-  bugFields.style.display = 'none';
-  ratingFields.style.display = 'none'; // BARU: Sembunyikan form rating
+  // Sembunyikan dan hapus class 'show' dari semua form
+  formSections.forEach(section => {
+    section.classList.remove('show');
+    section.style.display = 'none';
+  });
 
   // Reset required state
   document.getElementById('pesan_saran').required = false;
   document.getElementById('pesan_bug').required = false;
   document.getElementById('kategori_bug').required = false;
-  document.getElementById('pesan_rating').required = false; // BARU: Reset required rating
+  document.getElementById('pesan_rating').required = false;
+
+  let activeSection = null;
 
   if (type === 'Saran') {
-    saranFields.style.display = 'block';
+    activeSection = saranFields;
     document.getElementById('pesan_saran').required = true;
   } else if (type === 'Lapor Bug') {
-    bugFields.style.display = 'block';
+    activeSection = bugFields;
     document.getElementById('pesan_bug').required = true;
     document.getElementById('kategori_bug').required = true;
-  } else if (type === 'Penilaian') { // BARU: Logika untuk Penilaian
-    ratingFields.style.display = 'block';
+  } else if (type === 'Penilaian') {
+    activeSection = ratingFields;
     document.getElementById('pesan_rating').required = true;
     // Bintang wajib diisi
     document.querySelector('input[name="rating_bintang"]').required = true; 
+  }
+  
+  if (activeSection) {
+    // Tampilkan dan tambahkan class 'show' untuk memicu transisi
+    activeSection.style.display = 'block';
+    setTimeout(() => { // Beri sedikit waktu agar display:block diterapkan
+        activeSection.classList.add('show');
+    }, 10); 
   }
 }
 
 /* ===============================
    3. KETIKA FORM DIKIRIM (MENUJU PREVIEW)
-   (Diperbarui untuk menyimpan data Penilaian)
    =============================== */
 form.addEventListener('submit', function(event) {
   event.preventDefault();
@@ -434,12 +487,12 @@ form.addEventListener('submit', function(event) {
     formData.kategori = '-';
     formData.file = null;
     formData.media = '-';
-    formData.rating = null; // BARU
+    formData.rating = null; 
   } else if (selectedType === 'Lapor Bug') {
     formData.nama = document.getElementById('nama_bug').value || 'Anonim';
     formData.kategori = document.getElementById('kategori_bug').value;
     formData.pesan = document.getElementById('pesan_bug').value;
-    formData.rating = null; // BARU
+    formData.rating = null; 
 
     const mediaFile = document.getElementById('media_bug').files[0];
     if (mediaFile) {
@@ -449,7 +502,7 @@ form.addEventListener('submit', function(event) {
       formData.file = null;
       formData.media = 'Tidak Ada File';
     }
-  } else if (selectedType === 'Penilaian') { // BARU: Logika pengambilan data Penilaian
+  } else if (selectedType === 'Penilaian') { 
     formData.nama = document.getElementById('nama_rating').value || 'Anonim';
     formData.rating = document.querySelector('input[name="rating_bintang"]:checked').value;
     formData.pesan = document.getElementById('pesan_rating').value;
@@ -464,7 +517,6 @@ form.addEventListener('submit', function(event) {
 
 /* ===============================
    4. TAMPILKAN DATA DI HALAMAN PREVIEW
-   (Diperbarui untuk menampilkan Rating Bintang)
    =============================== */
 function updatePreview() {
   let ratingDisplay = '';
@@ -487,7 +539,6 @@ function updatePreview() {
 
 /* ===============================
    5. TOMBOL EDIT KEMBALI
-   (Tidak ada perubahan di sini)
    =============================== */
 editBtn.addEventListener('click', function() {
   switchToPage('form');
@@ -495,7 +546,6 @@ editBtn.addEventListener('click', function() {
 
 /* ===============================
    6. TOMBOL KONFIRMASI & KIRIM
-   (Tidak ada perubahan di sini)
    =============================== */
 confirmBtn.addEventListener('click', async function() {
   confirmBtn.disabled = true;
@@ -517,13 +567,13 @@ confirmBtn.addEventListener('click', async function() {
 
 /* ===============================
    7. MANAJEMEN HALAMAN
-   (Diperbarui untuk mendukung form rating)
    =============================== */
 function switchToPage(page) {
   document.querySelector('.type-group').style.display = 'none';
-  saranFields.style.display = 'none';
-  bugFields.style.display = 'none';
-  ratingFields.style.display = 'none'; // BARU: Sembunyikan form rating
+  formSections.forEach(section => {
+    section.classList.remove('show');
+    section.style.display = 'none';
+  });
   submitBtn.style.display = 'none';
   previewPage.style.display = 'none';
   thanksPage.style.display = 'none';
@@ -549,7 +599,6 @@ function switchToPage(page) {
 
 /* ===============================
    8. KIRIM KE DISCORD (DENGAN FILE & EMBED BAGUS)
-   (Diperbarui untuk mendukung format Penilaian)
    =============================== */
 async function sendToDiscord(data) {
   let url;
@@ -557,7 +606,7 @@ async function sendToDiscord(data) {
     url = WEBHOOK_SARAN;
   } else if (data.jenis === 'Lapor Bug') {
     url = WEBHOOK_BUG;
-  } else if (data.jenis === 'Penilaian') { // BARU: Webhook untuk Penilaian
+  } else if (data.jenis === 'Penilaian') { 
     url = WEBHOOK_RATING;
   }
 
@@ -577,7 +626,7 @@ async function sendToDiscord(data) {
   } else if (data.jenis === 'Lapor Bug') {
       embedColor = 0xe74c3c;
       titleEmoji = '🐞';
-  } else if (data.jenis === 'Penilaian') { // BARU: Konfigurasi untuk Penilaian
+  } else if (data.jenis === 'Penilaian') { 
       embedColor = 0xf1c40f; // Kuning keemasan untuk rating
       titleEmoji = '🌟';
   }
@@ -594,7 +643,7 @@ async function sendToDiscord(data) {
     footer: { text: '📩 Trimakasih atas pemberitahuannya.', icon_url: 'https://i.ibb.co.com/3mjNLYrn/20251112-175342.png' },
   };
 
-  // BARU: Tambahkan bidang rating
+  // Tambahkan bidang rating
   if (data.jenis === 'Penilaian' && data.rating) {
       const filledStars = '⭐'.repeat(data.rating);
       const emptyStars = '☆'.repeat(6 - data.rating);
@@ -629,7 +678,6 @@ async function sendToDiscord(data) {
 
 /* ===============================
    9. TAMPILAN AWAL
-   (Tidak ada perubahan di sini)
    =============================== */
 switchToPage('form');
 document.querySelector('.type-group').style.display = 'flex';
